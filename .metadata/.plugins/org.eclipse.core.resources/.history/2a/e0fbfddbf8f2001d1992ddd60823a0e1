@@ -1,0 +1,18 @@
+ /******************************************************************************
+ *
+ * Module: Ultrasonic
+ *
+ * File Name: ultrasonic.c
+ *
+ * Description: Header file for the Ultrasonic HCSR04 driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+
+#ifndef ULTRASONIC_H_
+#define ULTRASONIC_H_
+
+
+
+#endif /* ULTRASONIC_H_ */

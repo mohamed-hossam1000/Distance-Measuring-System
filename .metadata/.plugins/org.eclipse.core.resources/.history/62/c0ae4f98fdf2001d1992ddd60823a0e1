@@ -1,0 +1,73 @@
+ /******************************************************************************
+ *
+ * Module: Ultrasonic
+ *
+ * File Name: ultrasonic.c
+ *
+ * Description: Source file for the Ultrasonic HCSR04 driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+#include"ultrasonic.h"
+#include"icu.h"
+#include"gpio.h"
+#include<util/delay.h>
+/*******************************************************************************
+ * 									Global Variables
+ *******************************************************************************/
+static uint8  g_edgeCount = 0;
+static uint16 g_echoStart = 0;
+static uint16 g_echoEnd   = 0;
+/*******************************************************************************
+ * 									Functions Definitions
+ *******************************************************************************/
+/*
+ * Description :
+ * Initialize the ICU driver as required
+ * Setup the ICU call back function
+ * Setup the direction for the trigger pin as output pin
+ */
+void Ultrasonic_init(void)
+{
+	/* initialize the ICU with frequency F_CPU/8
+	 * and set up detection type to rising edge */
+	ICU_configType config;
+	config.clk=F_CPU_8;
+	config.edge=RISING_EDGE;
+	ICU_init(&config);
+	/* set call back function for ICU */
+	ICU_setCallBack(Ultrasonic_edgeProcessing);
+	/* set trigger pin as output pin */
+	GPIO_setupPinDirection(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, PIN_OUTPUT);
+}
+
+/*
+ * Description :
+ * send the trigger pulse to the ultrasonic
+ */
+static void Ultrasonic_Trigger(void)
+{
+	/* set the trigger pin to high for 10 us to send the trigger pulse */
+	GPIO_writePin(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, LOGIC_HIGH);
+	_delay_us(10);
+	GPIO_writePin(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, LOGIC_LOW);
+}
+
+/*
+ * Description :
+ * send trigger pulse
+ * measure the distance
+ * return the result
+ */
+uint16 Ultrasonic_readDistance(void)
+{
+	/* send trigger pulse */
+	Ultrasonic_Trigger();
+
+}
+
+static void Ultrasonic_edgeProcessing(void)
+{
+
+}

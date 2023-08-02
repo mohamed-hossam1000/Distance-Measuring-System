@@ -1,0 +1,14 @@
+ /******************************************************************************
+ *
+ * Project : Distance measuring System
+ *
+ * File Name: project3.c
+ *
+ * Description: measure the distance using Ultrasonic sensor HC-SR04 and display
+ * 				it on the LCD
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+
+

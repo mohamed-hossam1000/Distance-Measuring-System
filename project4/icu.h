@@ -1,0 +1,73 @@
+ /******************************************************************************
+ *
+ * Module: ICU
+ *
+ * File Name: icu.h
+ *
+ * Description: Header file for the ICU driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+
+#ifndef ICU_H_
+#define ICU_H_
+#include"std_types.h"
+
+/*******************************************************************************
+ * 								Types Declaration
+ ******************************************************************************/
+typedef enum{
+	FALLING_EDGE, RISING_EDGE
+}ICU_edgeType;
+
+typedef enum{
+	NO_CLK, F_CPU_1, F_CPU_8, F_CPU_64, F_CPU_256, F_CPU_1024
+}ICU_clock;
+
+typedef struct{
+	ICU_edgeType edge;
+	ICU_clock    clk;
+}ICU_configType;
+
+
+/*******************************************************************************
+ *                              Functions Prototypes                           *
+ *******************************************************************************/
+/*
+ * Description :
+ * initialize the ICU with the required frequency and edge detection
+ */
+void ICU_init(const ICU_configType* config);
+
+/*
+ * Description :
+ * change the type of edge the ICU detects
+ */
+void ICU_selectEdgeDetectionType(ICU_edgeType edge);
+
+/*
+ * Description :
+ * set call back address
+ */
+void ICU_setCallBack(void (*func_ptr)(void));
+
+
+/*
+ * Description :
+ * get the TIMER1 value when the input is captured
+ */
+uint16 ICU_getCapturedValue(void);
+
+/*
+ * Description :
+ * Function to clear timer value
+ */
+void ICU_cleaTimerValue();
+
+/*
+ * Description :
+ * function to disable Timer1 and the ICU
+ */
+void ICU_deinit();
+#endif /* ICU_H_ */

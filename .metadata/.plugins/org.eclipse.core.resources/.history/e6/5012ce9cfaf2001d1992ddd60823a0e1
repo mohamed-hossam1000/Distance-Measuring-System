@@ -1,0 +1,37 @@
+ /******************************************************************************
+ *
+ * Module: Ultrasonic
+ *
+ * File Name: ultrasonic.c
+ *
+ * Description: Source file for the Ultrasonic HCSR04 driver
+ *
+ * Author: Mohamed Hossam
+ *
+ *******************************************************************************/
+#include"ultrasonic.h"
+#include"icu.h"
+#include"gpio.h"
+
+/*
+ * Description :
+ * Initialize the ICU driver as required
+ * Setup the ICU call back function
+ * Setup the direction for the trigger pin as output pin
+ */
+void Ultrasonic_init(void)
+{
+	/* initialize the ICU with frequency F_CPU/8
+	 * and set up detection type to rising edge */
+	ICU_configType config;
+	config.clk=F_CPU_8;
+	config.edge=RISING_EDGE;
+	ICU_init(&config);
+	/* set call back function for ICU */
+	ICU_setCallBack(Ultrasonic_edgeProcessing);
+}
+
+void Ultrasonic_edgeProcessing(void)
+{
+
+}
